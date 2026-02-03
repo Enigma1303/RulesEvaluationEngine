@@ -1,14 +1,16 @@
 import logging
 
+from rules_parser_and_validation import RulesParserAndValidation
+from rules_evaluator import RulesEvaluator
+from result_generation import result_generation  
+
 logging.basicConfig( 
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     filename="rules_evaluation_engine.log",
     filemode="a"
 ) 
-from rules_parser_and_validation import RulesParserAndValidation
-from rules_evaluator import RulesEvaluator
-from result_generation import result_generation    
+  
 def main():
     logging.info("Starting Rules Evaluation Engine")
     rules_parser = RulesParserAndValidation()
