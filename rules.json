@@ -1,0 +1,17 @@
+[
+  {
+    "field": "age",
+    "operator": ">",
+    "value": 21
+  },
+  {
+    "field": "country",
+    "operator": "==",
+    "value": "IN"
+  },
+  {
+    "field": "income",
+    "operator": ">=",
+    "value": 25000
+  }
+]
