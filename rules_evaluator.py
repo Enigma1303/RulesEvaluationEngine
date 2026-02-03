@@ -43,7 +43,7 @@ class RulesEvaluator:
               file.close()
 
    def evaluate_rules(self, rules, entity):
-         print("Evaluation of rules starts now...")
+         logging.info("Starting rules evaluation on the entity.")
          #storing failed rules as they matter...
          failed_rules = []
          for rule in rules:
@@ -53,7 +53,7 @@ class RulesEvaluator:
              
              #getting value of that field in entity and function to be used
              if field not in entity:
-                 print(f" field {field} is missing in the entity {entity}")
+                 logging.warning(f"Field {field} not found in entity. Marking rule {rule} as failed.")
                  failed_rules.append(rule)
                  #making sure the code continues
                  continue
@@ -63,15 +63,17 @@ class RulesEvaluator:
              
              
              try:
+                 
                  if operatorfunction(valueinentity,value):
-                    print(f"So {field} passed the rule {rule}")
+                    logging.info(f"Rule {rule} passed for field {field} with value {valueinentity}.")
                  else:
-                    print(f"So {field} failed the rule {rule}")
-                    failed_rules.append(rule)   
-             except Exception as e:
-                    print(f"An error occurred while evaluating the rule {rule} on field {field}: {e}")
+                    logging.info(f"Rule {rule} failed for field {field} with value {valueinentity}.")
                     failed_rules.append(rule)
-                    
+                       
+             except Exception as e:
+                    logging.error(f"An error occurred while evaluating the rule {rule} on field {field}: {e}")
+                    failed_rules.append(rule)
+         logging.info(f"Rules evaluation completed. {len(failed_rules)} rules failed.")          
          return failed_rules                
           
     
